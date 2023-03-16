@@ -1,0 +1,52 @@
+{
+  "name": "qwik-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/qwik-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nxkit/playwright:test",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/qwik-e2e/test-results",
+        "playwrightConfig": "apps/qwik-e2e/playwright.config.ts",
+        "devServerTarget": "qwik:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "qwik:serve:production"
+        }
+      }
+    },
+    "debug": {
+      "executor": "@nxkit/playwright:test",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/qwik-e2e/test-results",
+        "playwrightConfig": "apps/qwik-e2e/playwright.config.ts",
+        "devServerTarget": "qwik:serve",
+        "debug": true
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "qwik:serve:production"
+        }
+      }
+    },
+    "show-report": {
+      "executor": "@nxkit/playwright:show-report",
+      "options": {
+        "reportPath": "dist/apps/qwik-e2e/playwright-report"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/qwik-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["qwik"]
+}
